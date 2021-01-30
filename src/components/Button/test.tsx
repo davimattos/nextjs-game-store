@@ -30,4 +30,11 @@ describe('<Button />', () => {
       'font-size': '1.2rem'
     })
   })
+
+  it('should render a full width version', () => {
+    renderWithTheme(<Button fullWidth>Click Me</Button>)
+    expect(screen.getByRole('button', { name: /Click Me/i })).toHaveStyle({
+      width: '100%'
+    })
+  })
 })

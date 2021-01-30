@@ -1,16 +1,19 @@
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
+import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart'
 
 import Button from '.'
 
 describe('<Button />', () => {
   it('should render a medium size by default', () => {
-    renderWithTheme(<Button>Click Me</Button>)
+    const { container } = renderWithTheme(<Button>Click Me</Button>)
     expect(screen.getByRole('button', { name: /Click Me/i })).toHaveStyle({
       height: '4rem',
       padding: '0.8rem 3.2rem',
       'font-size': '1.4rem'
     })
+
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render a large size when props is passed', () => {
@@ -36,5 +39,14 @@ describe('<Button />', () => {
     expect(screen.getByRole('button', { name: /Click Me/i })).toHaveStyle({
       width: '100%'
     })
+  })
+
+  it('should render with icon', () => {
+    renderWithTheme(
+      <Button icon={<AddShoppingCart data-testid="icon" />}>Click Me</Button>
+    )
+
+    expect(screen.getByText(/click me/i)).toBeInTheDocument()
+    expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 })

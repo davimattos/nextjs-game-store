@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
 import { Plugin, NewPlugin } from 'pretty-format'
 
@@ -5,7 +6,6 @@ declare global {
   namespace jest {
     interface AsymmetricMatcher {
       $$typeof: symbol
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       sample?: string | RegExp | object | Array<any> | Function
     }
 

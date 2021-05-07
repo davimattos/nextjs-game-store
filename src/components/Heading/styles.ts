@@ -4,12 +4,6 @@ import media from 'styled-media-query'
 import { HeadingProps, LineColors } from '.'
 
 const wrapperModifiers = {
-  primary: (theme: DefaultTheme) => css`
-    font-size: ${theme.font.sizes.xlarge};
-  `,
-  secondary: (theme: DefaultTheme) => css`
-    border-color: ${theme.colors.secondary};
-  `,
   small: (theme: DefaultTheme) => css`
     font-size: ${theme.font.sizes.medium};
 
@@ -19,6 +13,10 @@ const wrapperModifiers = {
   `,
   medium: (theme: DefaultTheme) => css`
     font-size: ${theme.font.sizes.xlarge};
+
+    ${media.greaterThan('medium')`
+      font-size: ${theme.font.sizes.xxlarge};
+    `}
   `,
   lineLeft: (theme: DefaultTheme, lineColor: LineColors) => css`
     padding-left: ${theme.spacings.xxsmall};
@@ -50,10 +48,6 @@ export const Wrapper = styled.h2<HeadingProps>`
     lineColor = 'primary'
   }) => css`
     color: ${theme.colors[color!]};
-
-    ${media.greaterThan('medium')`
-      font-size: ${theme.font.sizes.xxlarge};
-    `}
 
     ${lineLeft && wrapperModifiers.lineLeft(theme, lineColor)};
     ${lineBottom && wrapperModifiers.lineBottom(theme, lineColor)};
